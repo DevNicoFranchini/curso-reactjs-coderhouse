@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <NavBar />
-      <ItemListContainer greeting = {'Hola, somos Las Flores Pastelería'} />
+      <ItemListContainer />
     </div>
   );
 }
