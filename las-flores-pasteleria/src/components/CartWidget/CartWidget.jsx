@@ -1,9 +1,12 @@
-import React from "react";
-import logo from "../../../imgs/logo.png";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "./CartWidget.css";
 
 const CartWidget = () => {
-  return <img src={logo} alt="" />;
+  return (
+    <div>
+      <i className="bi bi-cart"></i>
+    </div>
+  );
 };
 
 export default CartWidget;

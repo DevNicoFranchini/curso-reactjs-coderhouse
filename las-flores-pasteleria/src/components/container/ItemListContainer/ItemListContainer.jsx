@@ -1,26 +1,30 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { gFetch } from "./../../../helpers/getFetch";
+import { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { gFetch } from "./../../../helpers/getFetch";
+
 import ItemsList from "../../ItemsList/ItemsList";
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { tipoId } = useParams();
 
   useEffect(() => {
-    gFetch
-      .then((resp) => {
-        setProducts(resp);
-      })
-      .catch((rej) => {
-        console.log(rej);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+    if (tipoId) {
+      gFetch
+        .then((resp) =>
+          setProducts(resp.filter((prod) => prod.tipo === tipoId))
+        )
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+    } else {
+      gFetch
+        .then((resp) => setProducts(resp))
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+    }
+  }, [tipoId]);
 
   return loading ? (
     <div className="text-center mt-4">
