@@ -1,3 +1,7 @@
-# curso-reactjs-coderhouse
+# Las Flores Pastelería
 
-## Este es un repositorio en donde cargaré mi avance en el curso de React Js dictado por CoderHouse. Cualquier sugerencia es bienvenida.
+![logo](/las-flores-pasteleria/imgs/logo.png)
+
+## E-Commerce enfocado en una tienda de pastelería dónde se comercializarán tortas, galletas, budines, entre otras cosas.
+
+### Se utilizan dependencias npm de bootstrap, react-bootstrap, bootstrap-icons.
