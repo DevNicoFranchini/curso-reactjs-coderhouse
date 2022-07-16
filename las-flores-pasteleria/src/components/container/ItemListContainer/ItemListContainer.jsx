@@ -8,14 +8,12 @@ import ItemsList from "../../ItemsList/ItemsList";
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { tipoId } = useParams();
+  const { tipo } = useParams();
 
   useEffect(() => {
-    if (tipoId) {
+    if (tipo) {
       gFetch
-        .then((resp) =>
-          setProducts(resp.filter((prod) => prod.tipo === tipoId))
-        )
+        .then((resp) => setProducts(resp.filter((prod) => prod.tipo === tipo)))
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     } else {
@@ -24,7 +22,7 @@ const ItemListContainer = () => {
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     }
-  }, [tipoId]);
+  }, [tipo]);
 
   return loading ? (
     <div className="text-center mt-4">

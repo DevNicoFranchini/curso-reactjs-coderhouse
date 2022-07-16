@@ -11,7 +11,9 @@ const NavBar = () => {
   return (
     <Navbar collapseOnSelect expand="lg" variant="dark" className="nav">
       <Container>
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
         <NavLink to="/" className="me-3">
           Las Flores Pastelería
         </NavLink>
