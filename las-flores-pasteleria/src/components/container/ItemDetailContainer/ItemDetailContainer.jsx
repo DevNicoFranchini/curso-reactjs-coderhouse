@@ -25,8 +25,6 @@ const ItemDetailContainer = () => {
     }, 2000);
   }, [id]);
 
-  console.log(id);
-
   return loading ? (
     <div className="text-center mt-4">
       <Button variant="primary" disabled>
