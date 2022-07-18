@@ -6,6 +6,7 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const existeEnCart = (id) => {
+    console.log(id);
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].item.id === id) {
         return true;
@@ -29,6 +30,10 @@ export const CartProvider = ({ children }) => {
     if (!existeEnCart(itemId)) {
       let items = cart.find((i) => i.item.id === itemId);
       cart.push(item);
+      alert("Producto agregado correctamente");
+    } else {
+      console.log(items);
+      alert("Producto ya existente");
     }
   };
 
