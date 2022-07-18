@@ -1,11 +1,28 @@
-import { Card } from "react-bootstrap";
-import { Container } from "react-bootstrap";
+import { Card, Container, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { CartContext } from "./../../context/CartContext";
 
 import ItemCount from "./../ItemCount/ItemCount";
 
 const ItemDetail = ({ item }) => {
-  const functionCount = (count) => {
-    console.log("El valor del contador es: ", count);
+  const [cart, existeEnCart, addCart, quitarCart, vaciarCart] =
+    useContext(CartContext);
+  const [cantidad, setCantidad] = useState();
+  console.log(cart);
+
+  const funcionContador = (cantidad) => {
+    console.log("El valo del contador es: ", cantidad);
+    setCantidad(cantidad);
+
+    const producto = {
+      item: item,
+      quantity: cantidad,
+      costo: item.precio,
+      id: item.id,
+    };
+
+    addCart(producto);
   };
 
   return (
@@ -16,7 +33,18 @@ const ItemDetail = ({ item }) => {
         <Card.Body>
           <Card.Text>{item.descripcion}</Card.Text>
           <Card.Text>{item.precio}</Card.Text>
-          <ItemCount stock={item.cantidad} initial={0} onAdd={functionCount} />
+          {cantidad ? (
+            <Link to="/cart">
+              {" "}
+              <Button>Terminar compra</Button>{" "}
+            </Link>
+          ) : (
+            <ItemCount
+              stock={item.cantidad}
+              initial={0}
+              onAdd={funcionContador}
+            />
+          )}
         </Card.Body>
       </Card>
     </Container>
