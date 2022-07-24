@@ -1,28 +1,22 @@
 import { useEffect, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { gFetch } from "../../../helpers/getFetch";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 import ItemDetail from "../../Item/ItemDetail";
 
 const ItemDetailContainer = () => {
-  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
-    setTimeout(() => {
-      gFetch
-        .then((resp) =>
-          setProducts(resp.find((prod) => prod.id === Number(id)))
-        )
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 2000);
+    const db = getFirestore();
+    const queryProduct = doc(db, "products", id);
+    getDoc(queryProduct)
+      .then((resp) => setProduct({ id: resp.id, ...resp.data() }))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }, [id]);
 
   return loading ? (
@@ -39,7 +33,7 @@ const ItemDetailContainer = () => {
       </Button>
     </div>
   ) : (
-    <ItemDetail item={products} />
+    <ItemDetail product={product} />
   );
 };
 
