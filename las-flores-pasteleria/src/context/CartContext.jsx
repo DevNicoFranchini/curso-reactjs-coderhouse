@@ -8,16 +8,24 @@ const CartProvider = ({ children }) => {
 
   // Agregar producto
 
-  /* const addProduct = (product) => {
+  const addProduct = (product) => {
     const indexProduct = cart.findIndex((prod) => prod.id === product.id);
     if (indexProduct === -1) {
       setCart([...cart, product]);
     } else {
-      const cantidadVieja = cart[indexProduct].cantidad;
-      cart[indexProduct].cantidad = cantidadVieja + product.cantidad;
+      const cantidadvieja = cart[indexProduct].cantidad;
+      cart[indexProduct].cantidad = cantidadvieja + product.cantidad;
       setCart([...cart]);
     }
-  }; */
+  };
+
+  const precioTotal = () => {
+    return cart.reduce(
+      (acumPrecio, prodObj) =>
+        (acumPrecio = acumPrecio + prodObj.price * prodObj.cantidad),
+      0
+    );
+  };
 
   const cantidadTotal = () => {
     return cart.reduce(
@@ -26,11 +34,23 @@ const CartProvider = ({ children }) => {
     );
   };
 
+  const eliminarProducto = (id) => {
+    setCart(cart.filter((prod) => prod.id !== id));
+  };
+
+  const emptyCart = () => {
+    setCart([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
         cart,
+        addProduct,
+        eliminarProducto,
+        emptyCart,
         cantidadTotal,
+        precioTotal,
       }}
     >
       {children}
@@ -49,41 +69,4 @@ export default CartProvider;
         return false;
       }
     }
-  }; */
-
-/* // Eliminar producto
-  const deleteCart = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
-    localStorage.setItem(
-      "cart",
-      JSON.stringify(cart.filter((prod) => prod.id !== id))
-    );
-    saveLocalStorage(
-      "cart",
-      cart.filter((item) => item.id !== id)
-    );
-  }; */
-
-/* // Vaciar cart
-  const emptyCart = () => {
-    setCart([]);
-    localStorage.setItem("cart", JSON.stringify([]));
-    saveLocalStorage("cart", []);
-  }; */
-
-/* // Precio total
-  const totalPrice = () => {
-    return cart.reduce(
-      (acumPrice, prodObj) =>
-        (acumPrice = acumPrice + prodObj.price * prodObj.quantity),
-      0
-    );
-  };
-
-  // Cantidad total
-  const totalQuantity = () => {
-    return cart.reduce(
-      (counter, produObj) => (counter += produObj.quantity),
-      0
-    );
   }; */
