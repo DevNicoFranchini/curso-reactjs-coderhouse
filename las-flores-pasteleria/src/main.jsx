@@ -4,10 +4,7 @@ import App from "./App";
 import getFirestoreApp from "./firebase/config";
 
 import "./index.css";
+
 getFirestoreApp();
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
