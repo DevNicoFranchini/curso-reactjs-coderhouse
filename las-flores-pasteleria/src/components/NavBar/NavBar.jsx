@@ -1,5 +1,6 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import { useCartContext } from "./../../context/CartContext";
 
 import React from "react";
 import Logo from "../Logo/Logo";
@@ -8,15 +9,14 @@ import CartWidget from "../CartWidget/CartWidget";
 import "./NavBar.css";
 
 const NavBar = () => {
+  const { cantidadTotal } = useCartContext();
+
   return (
     <Navbar collapseOnSelect expand="lg" variant="dark" className="nav">
       <Container>
         <Link to="/">
           <Logo />
         </Link>
-        <NavLink to="/" className="me-3">
-          Las Flores Pastelería
-        </NavLink>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto align-items-center">
@@ -26,9 +26,16 @@ const NavBar = () => {
             <NavLink to="/tipo/galletas" className="me-3">
               Galletas
             </NavLink>
+            <NavLink to="/tipo/budines" className="me-3">
+              Budines
+            </NavLink>
+            <NavLink to="/tipo/panaderia" className="me-3">
+              Panadería
+            </NavLink>
           </Nav>
           <Nav>
             <Link to="/cart">
+              {cantidadTotal() !== 0 && cantidadTotal()}
               <CartWidget />
             </Link>
           </Nav>
