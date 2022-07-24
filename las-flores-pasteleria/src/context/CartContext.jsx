@@ -22,7 +22,7 @@ const CartProvider = ({ children }) => {
   const precioTotal = () => {
     return cart.reduce(
       (acumPrecio, prodObj) =>
-        (acumPrecio = acumPrecio + prodObj.price * prodObj.cantidad),
+        (acumPrecio = acumPrecio + prodObj.precio * prodObj.cantidad),
       0
     );
   };
