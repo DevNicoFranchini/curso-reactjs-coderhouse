@@ -3,7 +3,7 @@ import Item from "../Item/Item";
 
 function ItemsList({ producto }) {
   return (
-    <Container className="d-flex justify-content-evenly mt-4 flex-wrap w-100">
+    <Container className="d-flex justify-content-evenly my-4 flex-wrap w-100">
       {producto.map((element) => (
         <Item products={element} key={element.id} />
       ))}

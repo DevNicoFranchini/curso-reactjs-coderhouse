@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { gFetch } from "./../../../helpers/getFetch";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 
 import ItemsList from "../../ItemsList/ItemsList";
 
@@ -11,25 +17,42 @@ const ItemListContainer = () => {
   const { tipo } = useParams();
 
   useEffect(() => {
+    const db = getFirestore();
     if (tipo) {
-      gFetch
-        .then((resp) => setProducts(resp.filter((prod) => prod.tipo === tipo)))
+      const queryCollection = collection(db, "products");
+      const queryCollectionFilter = query(
+        queryCollection,
+        where("tipo", "==", tipo)
+      );
+      getDocs(queryCollectionFilter)
+        .then((resp) =>
+          setProducts(
+            resp.docs.map((prod) => ({ id: prod.id, ...prod.data() }))
+          )
+        )
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     } else {
-      gFetch
-        .then((resp) => setProducts(resp))
+      const queryCollection = collection(db, "products");
+      getDocs(queryCollection)
+        .then((resp) =>
+          setProducts(
+            resp.docs.map((prod) => ({ id: prod.id, ...prod.data() }))
+          )
+        )
         .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     }
   }, [tipo]);
 
   return loading ? (
-    <div className="text-center mt-4">
-      <Spinner animation="border" role="status" variant="info" />
+    <div className="text-center my-4">
+      <Spinner animation="border" role="status" variant="dark" />
     </div>
   ) : (
-    <ItemsList producto={products} />
+    <div className="d-flex text-center my-4">
+      <ItemsList producto={products} />
+    </div>
   );
 };
 
