@@ -1,33 +1,24 @@
 import { useCartContext } from "../../../context/CartContext";
+import { Card, Button } from "react-bootstrap";
+
+import ItemCart from "../../Item/ItemCart";
 
 const Cart = () => {
-  const { cart, emptyCart, precioTotal, eliminarProducto } = useCartContext();
+  const { cart, emptyCart, precioTotal } = useCartContext();
 
   return (
     <div>
       <h1>Carrito</h1>
       <div className="row">
         <div className="col-md-6">
-          <h2>Producto</h2>
-          <ul>
-            {cart.map((product) => (
-              <>
-                <li key={product.id}>
-                  <img src={product.img} className="w-25" />
-                  <span> - Nombre: {product.nombre}</span>
-                  <span> - Precio: ${product.precio}</span>
-                  <span> - Cantidad: {product.cantidad}</span>
-                  <button onClick={() => eliminarProducto(product.id)}>
-                    {" "}
-                    X{" "}
-                  </button>
-                </li>
-              </>
-            ))}
-          </ul>
+          {cart.map((product) => (
+            <ItemCart product={product} />
+          ))}
         </div>
         <div className="w-25">
-          <button onClick={emptyCart}>Vaciar Carrito</button>
+          <Button variant="primary" onClick={emptyCart}>
+            Vaciar Carrito
+          </Button>
         </div>
         <div className="w-25">
           {precioTotal() !== 0 && `Precio Total: $${precioTotal()}`}
