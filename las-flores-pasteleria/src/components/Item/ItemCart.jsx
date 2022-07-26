@@ -11,7 +11,7 @@ const ItemCart = memo(({ product }) => {
       <Card.Img variant="top" src={product.img} className="p-2" />
       <Card.Body>
         <Card.Text>Cantidad agregada: {product.cantidad}</Card.Text>
-        <Button variant="primary" onClick={() => eliminarProducto(product.id)}>
+        <Button variant="danger" onClick={() => eliminarProducto(product.id)}>
           Eliminar del carrito
         </Button>
       </Card.Body>
