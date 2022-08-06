@@ -59,14 +59,3 @@ const CartProvider = ({ children }) => {
 };
 
 export default CartProvider;
-
-/* // Existe en cart?
-  const existeEnCart = (id) => {
-    for (let i = 0; i < cart.length; i++) {
-      if (cart[i].item.id === id) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }; */
