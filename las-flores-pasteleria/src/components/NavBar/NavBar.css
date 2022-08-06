@@ -1,3 +1,13 @@
 .nav {
   background-color: #d99c9c;
 }
+
+.navlink {
+  text-decoration: underline;
+  color: black;
+}
+
+.navlink:hover,
+.navlink:focus {
+  color: grey;
+}

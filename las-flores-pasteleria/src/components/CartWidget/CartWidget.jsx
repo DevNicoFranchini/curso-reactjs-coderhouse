@@ -4,7 +4,7 @@ import "./CartWidget.css";
 const CartWidget = () => {
   return (
     <div>
-      <i className="bi bi-cart"></i>
+      <i className="bi bi-cart navlink"></i>
     </div>
   );
 };

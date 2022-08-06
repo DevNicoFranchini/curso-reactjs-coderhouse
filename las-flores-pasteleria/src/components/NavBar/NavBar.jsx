@@ -20,21 +20,21 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto align-items-center">
-            <NavLink to="/tipo/tortas" className="me-3">
+            <NavLink to="/tipo/tortas" className="navlink me-3">
               Tortas
             </NavLink>
-            <NavLink to="/tipo/galletas" className="me-3">
+            <NavLink to="/tipo/galletas" className="navlink me-3">
               Galletas
             </NavLink>
-            <NavLink to="/tipo/budines" className="me-3">
+            <NavLink to="/tipo/budines" className="navlink me-3">
               Budines
             </NavLink>
-            <NavLink to="/tipo/panaderia" className="me-3">
+            <NavLink to="/tipo/panaderia" className="navlink me-3">
               Panadería
             </NavLink>
           </Nav>
           <Nav>
-            <Link to="/cart">
+            <Link to="/cart" >
               {cantidadTotal() !== 0 && cantidadTotal()}
               <CartWidget />
             </Link>
