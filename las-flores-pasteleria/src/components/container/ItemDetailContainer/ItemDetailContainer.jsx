@@ -20,7 +20,7 @@ const ItemDetailContainer = () => {
   }, [id]);
 
   return loading ? (
-    <div className="text-center mt-4">
+    <div className="text-center my-4">
       <Button variant="primary" disabled>
         <Spinner
           as="span"
