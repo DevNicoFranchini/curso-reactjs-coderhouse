@@ -34,7 +34,7 @@ const NavBar = () => {
             </NavLink>
           </Nav>
           <Nav>
-            <Link to="/cart" >
+            <Link className="navlink" to="/cart">
               {cantidadTotal() !== 0 && cantidadTotal()}
               <CartWidget />
             </Link>
