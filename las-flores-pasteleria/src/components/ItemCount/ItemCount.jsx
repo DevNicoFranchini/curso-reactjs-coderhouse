@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 
 const ItemCount = ({ stock, onAdd, initial }) => {
   const [count, setCount] = useState(initial);
@@ -17,15 +17,42 @@ const ItemCount = ({ stock, onAdd, initial }) => {
   };
 
   return (
-    <div>
-      <Button onClick={restar}> - </Button>
-      <span> {count} </span>
-      <Button onClick={sumar}> + </Button>
-      <Button disabled={count === 0} onClick={() => onAdd(count)}>
+    <Container>
+      <Button variant="danger" size="sm" onClick={restar}>
+        {" "}
+        -{" "}
+      </Button>
+      <span className="mx-2"> {count} </span>
+      <Button variant="success" size="sm" onClick={sumar}>
+        {" "}
+        +{" "}
+      </Button>
+      <Button
+        className="my-2"
+        variant="outline-secondary"
+        disabled={count === 0}
+        onClick={() => onAdd(count)}
+      >
         Agregar al carrito
       </Button>
-    </div>
+    </Container>
   );
 };
 
 export default ItemCount;
+
+/* <div>
+      <Button variant="danger" onClick={restar}>
+        {" "}
+        -{" "}
+      </Button>
+      <span> {count} </span>
+      <Button variant="success" onClick={sumar}>
+        {" "}
+        +{" "}
+      </Button>
+
+      <Button disabled={count === 0} onClick={() => onAdd(count)}>
+        Agregar al carrito
+      </Button>
+    </div> */
