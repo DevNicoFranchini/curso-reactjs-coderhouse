@@ -33,7 +33,7 @@ const ItemDetailContainer = () => {
       </Button>
     </div>
   ) : (
-    <ItemDetail product={product} />
+    <ItemDetail product={product}/>
   );
 };
 

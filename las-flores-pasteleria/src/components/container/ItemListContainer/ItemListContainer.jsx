@@ -50,9 +50,7 @@ const ItemListContainer = () => {
       <Spinner animation="border" role="status" variant="dark" />
     </div>
   ) : (
-    <div className="d-flex text-center my-4">
-      <ItemsList producto={products} />
-    </div>
+    <ItemsList producto={products} />
   );
 };
 

@@ -17,24 +17,28 @@ const ItemCount = ({ stock, onAdd, initial }) => {
   };
 
   return (
-    <Container>
-      <Button variant="danger" size="sm" onClick={restar}>
-        {" "}
-        -{" "}
-      </Button>
-      <span className="mx-2"> {count} </span>
-      <Button variant="success" size="sm" onClick={sumar}>
-        {" "}
-        +{" "}
-      </Button>
-      <Button
-        className="my-2"
-        variant="outline-secondary"
-        disabled={count === 0}
-        onClick={() => onAdd(count)}
-      >
-        Agregar al carrito
-      </Button>
+    <Container className="mt-3">
+      <div>
+        <Button variant="danger" size="sm" onClick={restar}>
+          {" "}
+          -{" "}
+        </Button>
+        <span className="mx-2"> {count} </span>
+        <Button variant="success" size="sm" onClick={sumar}>
+          {" "}
+          +{" "}
+        </Button>
+      </div>
+      <div>
+        <Button
+          className="my-2"
+          variant="outline-secondary"
+          disabled={count === 0}
+          onClick={() => onAdd(count)}
+        >
+          Agregar al carrito
+        </Button>
+      </div>
     </Container>
   );
 };

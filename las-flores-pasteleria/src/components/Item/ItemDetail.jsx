@@ -16,19 +16,23 @@ const ItemDetail = memo(({ product }) => {
 
   return (
     <Container className="d-flex w-100 justify-content-center">
-      <Card className="text-center mt-3 w-25 mx-1 shadow">
+      <Card className="text-center my-3 w-25 mx-1 shadow">
         <Card.Header as="h5">{product.nombre}</Card.Header>
         <Card.Img variant="top" src={product.img} className="p-2" />
-        <Card.Body>
-          <Card.Text>{product.descripcion}</Card.Text>
-          <Card.Text>{product.precio}</Card.Text>
+        <Card.Body className="py-0">
+          <Card.Text className="my-1">{product.descripcion}</Card.Text>
+          <Card.Text className="my-1">${product.precio}</Card.Text>
           {cantidad ? (
             <>
               <ItemCount stock={product.stock} initial={1} onAdd={onAdd} />
               <Link to="/cart">
-                <Button>Ver carrito</Button>
+                <Button className="m-2" variant="outline-info">
+                  Ver carrito
+                </Button>
               </Link>
-              <Button>Terminar compra</Button>
+              <Button className="m-2" variant="outline-success">
+                Terminar compra
+              </Button>
             </>
           ) : (
             <>
