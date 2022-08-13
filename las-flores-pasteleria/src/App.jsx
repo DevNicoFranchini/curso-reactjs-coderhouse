@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
 import ItemListContainer from "./components/container/ItemListContainer/ItemListContainer";
 import ItemDetailContainer from "./components/container/ItemDetailContainer/ItemDetailContainer";
 import Cart from "./components/container/Cart/Cart";
@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <CartProvider>
-        <div>
+        <Container fluid="true">
           <NavBar />
           <Routes>
             <Route index path="/" element={<ItemListContainer />} />
@@ -23,8 +23,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-          <Footer />
-        </div>
+        </Container>
       </CartProvider>
     </BrowserRouter>
   );
