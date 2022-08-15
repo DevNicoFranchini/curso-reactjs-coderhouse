@@ -3,7 +3,8 @@
 }
 
 .navlink {
-  text-decoration: underline;
+  
+  text-decoration: none;
   color: black;
 }
 

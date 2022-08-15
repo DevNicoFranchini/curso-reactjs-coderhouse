@@ -19,7 +19,7 @@ const NavBar = () => {
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto align-items-center">
+          <Nav className="me-auto text-center">
             <NavLink to="/tipo/tortas" className="navlink me-3">
               Tortas
             </NavLink>
@@ -33,10 +33,10 @@ const NavBar = () => {
               Panadería
             </NavLink>
           </Nav>
-          <Nav>
-            <Link className="navlink" to="/cart">
-              {cantidadTotal() !== 0 && cantidadTotal()}
+          <Nav className="d-flex justify-content-end align-items-center">
+            <Link className="d-flex navlink me-3" to="/cart">
               <CartWidget />
+              {cantidadTotal() !== 0 && `(${cantidadTotal()})`}
             </Link>
           </Nav>
         </Navbar.Collapse>
