@@ -15,8 +15,8 @@ const FormOrder = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center">
-      <div className="container p-4">
+    <Container className="d-flex flex-column justify-content-center mt-4">
+      <div className="container p-4 border">
         <h3 className="text-center mb-3">Datos personales</h3>
         <Form>
           <Row>
@@ -24,7 +24,6 @@ const FormOrder = () => {
               <Form.Control
                 placeholder="Nombre"
                 name="name"
-                required
                 onChange={(e) => {
                   validUser(e);
                 }}
@@ -34,7 +33,6 @@ const FormOrder = () => {
               <Form.Control
                 placeholder="Telefono"
                 name="phone"
-                required
                 onChange={(e) => {
                   validUser(e);
                 }}
@@ -47,7 +45,6 @@ const FormOrder = () => {
                 className="mt-2"
                 placeholder="Email"
                 name="email"
-                required
                 onBlur={(e) => {
                   validUser(e);
                 }}
@@ -55,26 +52,26 @@ const FormOrder = () => {
             </Col>
           </Row>
         </Form>
-        <div className="d-flex flex-column gap-2 col-2 w-100">
-          <div className="w-100">
-            {precioTotal() !== 0 && `Precio final: $${precioTotal()}`}
-          </div>
-          <Button variant="danger" size="sm" onClick={emptyCart}>
-            Vaciar Carrito
-          </Button>
-          <div className="w-100">
-            <Link to="/checkout">
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={generateOrder}
-                className="w-100"
-              >
-                Generar Orden
-              </Button>
-            </Link>
-          </div>
+      </div>
+      <div className="d-flex flex-column gap-2 col-2 w-100">
+        <div className="w-100">
+          {precioTotal() !== 0 && `Precio final: $${precioTotal()}`}
         </div>
+        <div className="w-100">
+          <Link to="/checkout">
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={generateOrder}
+              className="w-100"
+            >
+              Generar Orden
+            </Button>
+          </Link>
+        </div>
+        <Button variant="danger" size="sm" onClick={emptyCart}>
+          Vaciar Carrito
+        </Button>
       </div>
     </Container>
   );
