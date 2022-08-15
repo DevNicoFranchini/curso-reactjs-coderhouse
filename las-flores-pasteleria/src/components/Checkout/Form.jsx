@@ -15,7 +15,7 @@ const FormOrder = () => {
   };
 
   return (
-    <Container className="d-flex flex-column justify-content-center mt-4">
+    <Container className="d-flex flex-column justify-content-center my-4">
       <div className="container p-4 border">
         <h3 className="text-center mb-3">Datos personales</h3>
         <Form>
