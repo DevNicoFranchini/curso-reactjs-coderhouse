@@ -3,58 +3,37 @@ import { Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import FormOrder from "./../../Checkout/Form";
-
 import ItemCart from "../../Item/ItemCart";
 
+import "./Cart.css";
+
 const Cart = () => {
-  const { cart, emptyCart, precioTotal, generateOrder } = useCartContext();
+  const { cart } = useCartContext();
 
   return (
-    <Container>
-      <div>
-        <div className="ms-5">
-          {cart.length === 0 ? (
-            <div className="d-flex flex-column align-items-center justify-content-center my-2">
-              <h3>
-                {cart.length == 0 && `Tu carrito de compras se encuentra vacío`}
-              </h3>
+    <Container className="container-cart d-flex justify-content-center">
+      {cart.length === 0 ? (
+        <div className="d-flex flex-column align-items-center justify-content-center my-2 gap-5">
+          <h3>Tu carrito de compras se encuentra vacío</h3>
 
-              <Link to="/">
-                <Button>
-                  {cart.length == 0 && `Volver al inicio y empezar a comprar`}
-                </Button>
-              </Link>
-            </div>
-          ) : (
-            <Container className="d-flex my-4">
-              <div className="d-flex justify-content-evenly col-10">
-                <div>
-                  {cart.map((product) => (
-                    <ItemCart key={product.id} product={product} />
-                  ))}
-                </div>
-                <FormOrder />
-              </div>
-
-              <div className="d-flex flex-column gap-2 col-2">
-                <div className="w-100">
-                  {precioTotal() !== 0 && `Precio final: $${precioTotal()}`}
-                </div>
-                <Button variant="danger" size="sm" onClick={emptyCart}>
-                  Vaciar Carrito
-                </Button>
-                <div className="w-100">
-                  <Link to="/checkout">
-                    <Button variant="primary" size="sm" onClick={generateOrder}>
-                      Generar Orden
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </Container>
-          )}
+          <Link to="/">
+            <Button size="lg">
+              {cart.length == 0 && `Volver al inicio y empezar a comprar`}
+            </Button>
+          </Link>
         </div>
-      </div>
+      ) : (
+        <Container className="d-flex justify-content-evenly flex-wrap">
+          <div className="d-flex flex-wrap justify-content-center align-items-center col-12 col-md-8">
+            {cart.map((product) => (
+              <ItemCart key={product.id} product={product} />
+            ))}
+          </div>
+          <div className="d-flex justify-content-center align-items-start col-12 col-md-4">
+            <FormOrder />
+          </div>
+        </Container>
+      )}
     </Container>
   );
 };
