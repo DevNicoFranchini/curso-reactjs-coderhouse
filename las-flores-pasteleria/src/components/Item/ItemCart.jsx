@@ -3,7 +3,7 @@ import { memo } from "react";
 import { useCartContext } from "../../context/CartContext";
 
 const ItemCart = memo(({ product }) => {
-  const { eliminarProducto, cart } = useCartContext();
+  const { eliminarProducto } = useCartContext();
 
   return (
     <Card className="text-center my-1 w-50 mx-1 shadow">

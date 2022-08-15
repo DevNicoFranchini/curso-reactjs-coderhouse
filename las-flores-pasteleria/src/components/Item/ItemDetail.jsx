@@ -30,9 +30,11 @@ const ItemDetail = memo(({ product }) => {
                   Ver carrito
                 </Button>
               </Link>
-              <Button className="m-2" variant="outline-success">
-                Terminar compra
-              </Button>
+              <Link to="/">
+                <Button className="m-2" variant="outline-success">
+                  Seguir comprando
+                </Button>
+              </Link>
             </>
           ) : (
             <>
