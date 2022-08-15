@@ -1,36 +1,13 @@
 import { useCartContext } from "../../../context/CartContext";
 import { Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { getFirestore, addDoc, collection } from "firebase/firestore";
+
+import FormOrder from "./../../Checkout/Form";
 
 import ItemCart from "../../Item/ItemCart";
 
 const Cart = () => {
-  const { cart, emptyCart, precioTotal } = useCartContext();
-
-  const generateOrder = () => {
-    const order = {};
-    (order.buyer = {
-      name: "Nombre",
-      phone: "11111",
-      email: "nombre@gmail.com",
-    }),
-      (order.items = cart.map((prod) => {
-        const id = prod.id;
-        const title = prod.nombre;
-        const cantidad = prod.cantidad;
-
-        return { id, title, cantidad };
-      }));
-    order.total = precioTotal();
-
-    const db = getFirestore();
-    const queryInsertCollection = collection(db, "orders");
-    addDoc(queryInsertCollection, order)
-      .then((resp) => console.log(resp))
-      .catch((err) => console.log(err))
-      .finally(() => emptyCart());
-  };
+  const { cart, emptyCart, precioTotal, generateOrder } = useCartContext();
 
   return (
     <Container>
@@ -43,9 +20,9 @@ const Cart = () => {
               </h3>
 
               <Link to="/">
-                <h3>
+                <Button>
                   {cart.length == 0 && `Volver al inicio y empezar a comprar`}
-                </h3>
+                </Button>
               </Link>
             </div>
           ) : (
@@ -56,6 +33,7 @@ const Cart = () => {
                     <ItemCart key={product.id} product={product} />
                   ))}
                 </div>
+                <FormOrder />
               </div>
 
               <div className="d-flex flex-column gap-2 col-2">
@@ -65,9 +43,13 @@ const Cart = () => {
                 <Button variant="danger" size="sm" onClick={emptyCart}>
                   Vaciar Carrito
                 </Button>
-                <Button variant="primary" size="sm" onClick={generateOrder}>
-                  Generar Orden
-                </Button>
+                <div className="w-100">
+                  <Link to="/checkout">
+                    <Button variant="primary" size="sm" onClick={generateOrder}>
+                      Generar Orden
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </Container>
           )}
