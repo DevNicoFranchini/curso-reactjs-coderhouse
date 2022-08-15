@@ -5,6 +5,8 @@ import { useCartContext } from "./../../context/CartContext";
 
 import ItemCount from "./../ItemCount/ItemCount";
 
+import "./Item.css";
+
 const ItemDetail = memo(({ product }) => {
   const { addProduct } = useCartContext();
   const [cantidad, setCantidad] = useState();
@@ -16,7 +18,7 @@ const ItemDetail = memo(({ product }) => {
 
   return (
     <Container className="d-flex w-100 justify-content-center">
-      <Card className="text-center my-3 w-25 mx-1 shadow">
+      <Card className="text-center my-3 mx-1 shadow item">
         <Card.Header as="h5">{product.nombre}</Card.Header>
         <Card.Img variant="top" src={product.img} className="p-2" />
         <Card.Body className="py-0">
