@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useCartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
-import { Spinner } from "react-bootstrap";
+import { Button, Container, Spinner } from "react-bootstrap";
 
 function Checkout() {
   const { order } = useCartContext();
@@ -21,23 +21,22 @@ function Checkout() {
       />
     </div>
   ) : (
-    <>
-      <div className="m-4 text-center">
-        <div className="border">
-          <h4 className="text-center mt-4">
-            Su compra fue realizada con exito!
-          </h4>
-          <h5 className="ms-4">Id de la orden: {order}</h5>
-          <p>Gracias vuelva pronto!</p>
-        </div>
-        <Link
-          to={"/"}
-          className="text-center text-decoration-none css-button-sliding-to-left--sky mt-4"
-        >
-          Ir al Incio
-        </Link>
+    <Container className="d-flex flex-column justify-content-center align-items-center text-center">
+      <div>
+        <h4 className="text-center mt-4">
+          ¡Gracias por confiar en Las Flores Pastelería! Su compra fue realizada
+          con éxito
+        </h4>
+        <h4 className="my-4">El id de su orden es: {order}</h4>
       </div>
-    </>
+      <Link
+        to={"/"}
+        className="text-center text-decoration-none css-button-sliding-to-left--sky mt-4"
+      >
+        {" "}
+        <Button>Volver al inicio</Button>
+      </Link>
+    </Container>
   );
 }
 
