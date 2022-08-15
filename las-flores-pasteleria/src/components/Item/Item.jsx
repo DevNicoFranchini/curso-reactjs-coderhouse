@@ -8,7 +8,7 @@ const Item = memo(({ products }) => {
   return (
     <Link
       to={`/detail/${products.id}`}
-      className="d-flex justify-content-evenly w-25 item"
+      className="d-flex justify-content-evenly item"
     >
       <Card className="text-center m-2 w-100 shadow">
         <Card.Header as="h5">{products.nombre}</Card.Header>
@@ -16,7 +16,9 @@ const Item = memo(({ products }) => {
         <Card.Body className="py-0">
           <Card.Text>{products.descripcion}</Card.Text>
           <Card.Text>${products.precio}</Card.Text>
-          <Button className="mb-4" variant="outline-secondary">Ver más</Button>
+          <Button className="mb-4" variant="outline-secondary">
+            Ver más
+          </Button>
         </Card.Body>
       </Card>
     </Link>
