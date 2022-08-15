@@ -1,13 +1,19 @@
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
+import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
 
 const CartContext = createContext();
 export const useCartContext = () => useContext(CartContext);
 
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [user, setUser] = useState([]);
+  const [order, setOrder] = useState([]);
+
+  useEffect(() => {
+    setUser({ name: "", email: "", phone: "" });
+  }, []);
 
   // Agregar producto
-
   const addProduct = (product) => {
     const indexProduct = cart.findIndex((prod) => prod.id === product.id);
     if (indexProduct === -1) {
@@ -19,6 +25,7 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  // Precio total
   const precioTotal = () => {
     return cart.reduce(
       (acumPrecio, prodObj) =>
@@ -27,6 +34,7 @@ const CartProvider = ({ children }) => {
     );
   };
 
+  // Cantidad total
   const cantidadTotal = () => {
     return cart.reduce(
       (contador, produObject) => (contador += produObject.cantidad),
@@ -34,12 +42,41 @@ const CartProvider = ({ children }) => {
     );
   };
 
+  // Eliminar producto
   const eliminarProducto = (id) => {
     setCart(cart.filter((prod) => prod.id !== id));
   };
 
+  // Vaciar carrito
   const emptyCart = () => {
     setCart([]);
+  };
+
+  // Generar orden
+  const generateOrder = () => {
+    const order = {};
+    const dateNow = new Date();
+    order.buyer = {
+      nombre: user.name,
+      email: user.email,
+      telefono: user.phone,
+    };
+    order.date = dateNow;
+    order.items = cart.map((prod) => {
+      const id = prod.id;
+      const name = prod.nombre;
+      const quantity = prod.cantidad;
+      return { id, name, quantity };
+    });
+    order.total = precioTotal();
+    const db = getFirestore();
+    const queryInsert = collection(db, "orders");
+    addDoc(queryInsert, order)
+      .then((resp) => {
+        setOrder(resp.id);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => emptyCart());
   };
 
   return (
@@ -51,6 +88,10 @@ const CartProvider = ({ children }) => {
         emptyCart,
         cantidadTotal,
         precioTotal,
+        generateOrder,
+        user,
+        setUser,
+        order,
       }}
     >
       {children}
